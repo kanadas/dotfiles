@@ -1,0 +1,25 @@
+#!/bin/bash
+if test -f "/etc/default/grub" then
+    cp /etc/default/grub default/grub.bak
+    echo "Backuped your /etc/default/grub in ./default/grub.bak"
+    rm /etc/default/grub
+fi
+ln -s default/grub /etc/default/grub
+if [[ $? != 0 ]] then
+    echo "Configuration failed"
+    if test -f "default/grub" then
+        cp default/grub /etc/default/grub;
+        if [[ $? == 0 ]] then
+            echo "Restored /etc/default/grub"
+        fi
+    fi
+    exit
+fi
+for $file in "grub.d" do
+    ln -s grub.d/$file /etc/grub.d/$file
+    if [[ $? != 0 ]] then
+        echo "Failed to symlink grub.d/$file"
+    fi
+done
+echo "Finished"
+

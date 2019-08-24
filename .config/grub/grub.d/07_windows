@@ -1,0 +1,11 @@
+#!/bin/sh -e
+cat  << EOF
+menuentry "Okno" {
+	insmod part_msdos
+	insmod ntfs
+	insmod search_fs_uuid
+	insmod ntldr
+	search --fs-uuid --set=root --hint-bios=hd0,msdos3 --hint-efi=hd0,msdos3 --hint-baremetal=ahci0,msdos1 D8EC99A7EC998084
+	ntldr /bootmgr
+}
+EOF
