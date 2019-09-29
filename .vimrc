@@ -110,7 +110,7 @@ Plugin 'w0rp/ale'
 Plugin 'lervag/vimtex'
 Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'cosminadrianpopescu/vim-sql-workbench'
+"Plugin 'cosminadrianpopescu/vim-sql-workbench'
 Plugin 'bitc/vim-hdevtools'
 Plugin 'joe-skb7/cscope-maps'
 "Plugin 'vim-syntastic/syntastic'
@@ -152,7 +152,7 @@ let g:ale_linters = {
 "let g:ale_linters_ignore = ['clangd']
 let g:ale_nasm_nasm_options = '-f elf64'
 let g:ale_c_gcc_options = '-std=c11 -Wall -Wextra'
-" Temporary - some obsolete error in 1st JPP task -- 
+" Temporary - some obsolete error in 1st JPP task --
 let g:ale_haskell_hdevtools_options = '-g -isrc -g -Wall -g -hide-package -g libiserv'
 let g:ale_fixers = {
 \   'c': ['remove_trailing_lines', 'trim_whitespace']
@@ -163,11 +163,11 @@ let g:ale_fixers = {
 
 
 "CtrlP and SQLWorkbech config
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:sw_exe = '/opt/SQLWorkbench/sqlwbconsole.sh'
-let g:ctrlp_extensions = ['sw_profiles']
-let g:sw_config_dir = '/home/tkanas/.sqlworkbench'
+"let g:ctrlp_map = '<c-p>'
+"let g:ctrlp_cmd = 'CtrlP'
+"let g:sw_exe = '/opt/SQLWorkbench/sqlwbconsole.sh'
+"let g:ctrlp_extensions = ['sw_profiles']
+"let g:sw_config_dir = '/home/tkanas/.sqlworkbench'
 
 "Hdevtools bindings
  au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>

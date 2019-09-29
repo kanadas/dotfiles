@@ -270,17 +270,14 @@ bindsym $mod+Shift+8	move container to workspace $ws8
 bindsym $mod+Shift+9	move container to workspace $ws9
 bindsym $mod+Shift+0	move container to workspace $ws10
 
-for_window [class="Pinentry"] sticky enable
-for_window [class="sent"] border pixel 0px
+#for_window [class="Pinentry"] sticky enable
+#for_window [class="sent"] border pixel 0px
 #for_window [class="Blender"] move to workspace $ws6
 #for_window [class="marble"] move to workspace $ws7
 #for_window [title="GIMP Startup"] move workspace $ws5
 #for_window [class="Gimp"] move workspace $ws5
-for_window [window_role="GtkFileChooserDialog"] resize shrink height 10 px
+#for_window [window_role="GtkFileChooserDialog"] resize shrink height 10 px
 #for_window [title="Default - Wine desktop"] floating enable
-for_window [title = "Spotify"] move to workspace $ws10
-for_window [title = "Mailspring"] move to workspace $ws9
-for_window [title = "Skype"] move to workspace $ws7
 
 # First I have a tmux window used for background scripts.
 # I'll later bind this to mod+u.
@@ -306,13 +303,13 @@ for_window [title="__math"] border pixel 2
 exec --no-startup-id $term -title __math -f mono:pixelsize=24 -e dropdowncalc
 
 # Bindings to make the webcam float and stick.
-for_window [title="mpvfloat"] floating enable
-for_window [title="mpvfloat"] sticky enable
-for_window [title="mpvfloat"] border pixel 0
-no_focus [title="mpvfloat"]
+#for_window [title="mpvfloat"] floating enable
+#for_window [title="mpvfloat"] sticky enable
+#for_window [title="mpvfloat"] border pixel 0
+#no_focus [title="mpvfloat"]
 
 # #---Function Buttons---# #
-bindsym $mod+F1		exec --no-startup-id okular ~/.config/i3/i3_guide.pdf
+bindsym $mod+F1		exec --no-startup-id zathura ~/.config/i3/i3_guide.pdf
 bindsym $mod+F2		restart
 bindsym $mod+F3		exec --no-startup-id displayselect
 bindsym $mod+F4		exec --no-startup-id $hibernate
@@ -371,9 +368,9 @@ bindsym $mod+Shift+Right 	move right
 # These are the extra media keys that some keyboards have.
 #bindsym XF86AudioMute		exec --no-startup-id lmc mute
 bindsym XF86AudioLowerVolume	exec --no-startup-id amixer sset Master 5%-
+bindsym XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 5%+
 #bindsym Shift+XF86AudioLowerVolume	exec --no-startup-id lmc down 10
 #bindsym Control+XF86AudioLowerVolume	exec --no-startup-id lmc down 1
-bindsym XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 5%+
 #bindsym Shift+XF86AudioRaiseVolume	exec --no-startup-id lmc up 10
 #bindsym Control+XF86AudioRaiseVolume	exec --no-startup-id lmc up 1
 #bindsym XF86PowerOff		exec --no-startup-id prompt "Are you sure you want to shutdown?" "$shutdown"
@@ -480,31 +477,38 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-	font pango:mono 11
-	colors {
-			background $darkblack
-			statusline $darkwhite
-			separator $cyan
-			focused_workspace  $blue $darkblue $darkblack
-        		active_workspace   $blue $blue $darkwhite
-      			inactive_workspace $darkblack $darkblack $white
-        		urgent_workspace   $darkblack $darkblack $white
-		}
-	status_command i3blocks
-	position top
-	mode dock
-	modifier None
-}
+#bar {
+#	font pango:mono 11
+#	colors {
+#			background $darkblack
+#			statusline $darkwhite
+#			separator $cyan
+#			focused_workspace  $blue $darkblue $darkblack
+#        		active_workspace   $blue $blue $darkwhite
+#      			inactive_workspace $darkblack $darkblack $white
+#        		urgent_workspace   $darkblack $darkblack $white
+#		}
+#	status_command i3blocks
+#	position top
+#	mode dock
+#	modifier None
+#}
+
+# Starts polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # keyboard layout
-exec_always setxkbmap -layout pl -option compose:menu -option lv3:alt_switch -option nbsp:level3n
+#exec_always setxkbmap -layout pl -option compose:menu -option lv3:alt_switch -option nbsp:level3n
 
 
 
 # #---Startup Apps---# #
+for_window [class = "Spotify"] move to workspace $ws10
+for_window [class = "Skype"] move to workspace $ws7
+#for_window [title = "Mailspring"] move to workspace $ws9
+
 exec spotify
-exec mailspring
 exec skypeforlinux
 exec $BROWSER
+#exec mailspring
 
