@@ -29,17 +29,18 @@ set softtabstop=4   " Sets the number of columns for a TAB.
 set expandtab       " Expand TABs to spaces.
 set shiftround      "Round indent to nearest shiftwidth multiple
  " Use actual tab chars in Makefiles.
+ "set autoread
+set encoding=utf-8
+set fenc=utf-8
+"set mouse=a
+set autoindent
 autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
 autocmd FileType javascript set tabstop=4 shiftwidth=4 softtabstop=4
 autocmd FileType haskell set tabstop=8 softtabstop=4 shiftwidth=4
 autocmd FileType c set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab
-autocmd FileType sql set shiftwidth=2 softtabstop=2 expandtab
-autocmd FileType plsql set shiftwidth=2 softtabstop=2 expandtab
-set autoread
-set encoding=utf-8
-set fileencoding=utf-8
-"set mouse=a
-set autoindent
+autocmd FileType sql set shiftwidth=2 softtabstop=2 expandtab "encoding=latin2 "fenc=iso8859_2
+autocmd FileType plsql set shiftwidth=2 softtabstop=2 expandtab "encoding=iso8859_2 fenc=iso8859_2
+autocmd FileType xml set shiftwidth=2 softtabstop=2 expandtab "encoding=iso8859_2 fenc=iso8859_2
 
 " enable matchit plugin which ships with vim and greatly enhances '%'
 runtime macros/matchit.vim
@@ -85,12 +86,12 @@ map <C-W><C-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 "highlight ColorColumn ctermbg=Black ctermfg=DarkRed
 " Highlight trailing spaces
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
+"highlight ExtraWhitespace ctermbg=red guibg=red
+"match ExtraWhitespace /\s\+$/
+"autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+"autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+"autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+"autocmd BufWinLeave * call clearmatches()
 
 :nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
@@ -143,17 +144,18 @@ nmap <C-I> :ALEDetail<CR>
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " turns of every linter except hdevtools and hides libiserv package
-"Blacklisting c, c++ because ycm works better
+"Blacklisting c, c++, java because ycm works better
 let g:ale_linters = {
 \   'haskell': ['hdevtools'],
 \   'c': [],
-\   'c++': []
+\   'c++': [],
+\   'java': []
 \}
 "let g:ale_linters_ignore = ['clangd']
 let g:ale_nasm_nasm_options = '-f elf64'
 let g:ale_c_gcc_options = '-std=c11 -Wall -Wextra'
 " Temporary - some obsolete error in 1st JPP task --
-let g:ale_haskell_hdevtools_options = '-g -isrc -g -Wall -g -hide-package -g libiserv'
+"let g:ale_haskell_hdevtools_options = '-g -isrc -g -Wall -g -hide-package -g libiserv'
 let g:ale_fixers = {
 \   'c': ['remove_trailing_lines', 'trim_whitespace']
 \}

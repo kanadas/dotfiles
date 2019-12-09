@@ -1,0 +1,16 @@
+set imap_user = "t.kanas@student.uw.edu.pl"
+# set imap_pass = "PASSWORD"
+set smtp_url = "smtp://t.kanas@student.uw.edu.pl@smtp.gmail.com:587/"
+set from = "kanas.tomasz@gmail.com"
+set realname = "Tomasz Kanas"
+set folder = "imaps://imap.gmail.com:993/"
+set spoolfile = "+INBOX"
+set postponed = "+[Gmail]/Drafts"
+set header_cache = ~/.config/mutt/t.kanas.student.uw/cache/headers
+set message_cachedir = ~/.config/mutt/t.kanas.student.uw/cache/bodies
+set certificate_file = ~/.config/mutt/t.kanas.student.uw/certificates
+set ssl_starttls = yes
+set ssl_force_tls = yes
+set status_format = "$from -%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---"
+unset record
+
