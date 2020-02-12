@@ -48,9 +48,9 @@ font pango:monospace 8
 
 
 # #---Audio definitions---# #
-set $playpause exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
-set $previous exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
-set $next exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+set $spotify_playpause exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+set $spotify_play_previous exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+set $spotify_play_next exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 
 
 
@@ -124,114 +124,114 @@ bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Are you sure you want 
 bindsym $mod+asciitilde     exec --no-startup-id toggletouchpad
 
 #STOP/HIDE EVERYTHING:
-bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec $truepause ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e ranger
+#bindsym $mod+Shift+Delete	exec --no-startup-id lmc truemute ; exec $truepause ; exec --no-startup-id pauseallmpv; workspace 0; exec $term -e htop ; exec $term -e ranger
 
 
 
 # #---Letter Key Bindings---# #
-bindsym $mod+q			[con_id="__focused__" instance="^(?!__math|dropdown).*$"] kill
-bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!__math|dropdown).*$"] kill
-
-bindsym $mod+w			exec --no-startup-id $BROWSER
-bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
-
-bindsym $mod+e			exec $term -e neomutt
-#bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
-
-bindsym $mod+Shift+r 			exec $term -e ranger
-
-bindsym $mod+t			split toggle
-bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
-
-#bindsym $mod+y			exec $term -e calcurse
-bindsym $mod+Shift+y		exec --no-startup-id "bash ~/.scripts/i3resize left"
-
-bindsym $mod+u			[instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
-bindsym $mod+Shift+u		exec --no-startup-id "bash ~/.scripts/i3resize down"
-
-bindsym $mod+i 			exec $term -e htop
-bindsym $mod+Shift+i		exec --no-startup-id "bash ~/.scripts/i3resize up"
-
-bindsym $mod+o			sticky toggle
-bindsym $mod+Shift+o		exec --no-startup-id "bash ~/.scripts/i3resize right"
-
-#bindsym $mod+p			exec --no-startup-id lmc toggle
-#bindsym $mod+Shift+p		exec --no-startup-id lmc pause
-bindsym $mod+Shift+p    $previous
-
-#bindsym $mod+a			[instance="__math"] scratchpad show; [instance="__math"] move position center
-bindsym $mod+a			[title="__math"] scratchpad show; [title="__math"] move position center
+bindsym $mod+a			    exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
 bindsym $mod+Shift+a		exec $term -e pulsemixer
 
-bindsym $mod+s			gaps inner current plus 5
+bindsym $mod+b			    bar mode toggle
+bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id bottomleft
+
+bindsym $mod+c			    exec --no-startup-id camtoggle
+##bindsym $mod+Shift+c
+
+bindsym $mod+d			    exec --no-startup-id dmenu_run
+bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
+
+bindsym $mod+e			    exec $term -e neomutt
+#bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
+
+bindsym $mod+f			    fullscreen toggle
+bindsym $mod+Shift+f		mode "$freeze"
+
+bindsym $mod+g			    workspace prev
+bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
+
+bindsym $mod+h			    focus left
+bindsym $mod+Shift+h		move left 30
+
+bindsym $mod+i 			    exe c $term -e htop
+bindsym $mod+Shift+i		exec --no-startup-id i3resize up
+
+bindsym $mod+j			    focus down
+bindsym $mod+Shift+j		move down 30
+
+bindsym $mod+k			    focus up
+bindsym $mod+Shift+k		move up 30
+
+bindsym $mod+l			    focus right
+bindsym $mod+Shift+l		move right 30
+
+#bindsym $mod+m 			exec --no-startup-id st -e ncmpcpp
+#bindsym $mod+Shift+m		exec --no-startup-id lmc mute
+bindsym $mod+Shift+m        $spotify_playpause
+
+bindsym $mod+n			    exec $term -e newspod
+bindsym $mod+Shift+n        $spotify_play_next
+
+bindsym $mod+o			    sticky toggle
+bindsym $mod+Shift+o		exec --no-startup-id i3resize right
+
+#bindsym $mod+p			    exec --no-startup-id lmc toggle
+#bindsym $mod+Shift+p		exec --no-startup-id lmc pause
+bindsym $mod+Shift+p        $spotify_play_previous
+
+bindsym $mod+q			    [con_id="__focused__" instance="^(?!__math|dropdown).*$"] kill
+bindsym $mod+Shift+q		[con_id="__focused__" instance="^(?!__math|dropdown).*$"] kill
+
+bindsym $mod+Shift+r 		exec $term -e ranger
+
+bindsym $mod+s			    gaps inner current plus 5
 bindsym $mod+Shift+s		gaps inner current minus 5
 
-bindsym $mod+d			exec --no-startup-id dmenu_run
-bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
+bindsym $mod+t			    split toggle
+bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
+
+bindsym $mod+u			    [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
+bindsym $mod+Shift+u		exec --no-startup-id i3resize down
+
+bindsym $mod+v			    exec $term -e ncmpcpp -s visualizer
+bindsym $mod+Shift+v		exec --no-startup-id projectM-pulseaudio
+
+bindsym $mod+w			    exec --no-startup-id $BROWSER
+bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
+
+bindsym $mod+x			    exec --no-startup-id i3lock
+bindsym $mod+Shift+x		exec --no-startup-id prompt "Are you sure you want to shutdown?" "$shutdown"
+
+#bindsym $mod+y			    exec $term -e calcurse
+bindsym $mod+Shift+y		exec --no-startup-id i3resize left
+
+bindsym $mod+z			    gaps outer current plus 5
+bindsym $mod+Shift+z		gaps outer current minus 5
+
+
 
 set $freeze Distraction-free mode (mod+shift+esc to exit)
 mode "$freeze" { bindsym $mod+Shift+Escape mode "default"
 }
 
-bindsym $mod+f			fullscreen toggle
-bindsym $mod+Shift+f		mode "$freeze"
-
-bindsym $mod+g			workspace prev
-bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
-
-bindsym $mod+h			focus left
-bindsym $mod+Shift+h		move left 30
-
-bindsym $mod+j			focus down
-bindsym $mod+Shift+j		move down 30
-
-bindsym $mod+k			focus up
-bindsym $mod+Shift+k		move up 30
-
-bindsym $mod+l			focus right
-bindsym $mod+Shift+l		move right 30
-
-bindsym $mod+z			gaps outer current plus 5
-bindsym $mod+Shift+z		gaps outer current minus 5
-
-bindsym $mod+x			exec --no-startup-id i3lock
-bindsym $mod+Shift+x		exec --no-startup-id prompt "Are you sure you want to shutdown?" "$shutdown"
-
-bindsym $mod+c			exec --no-startup-id camtoggle
-##bindsym $mod+Shift+c
-
-bindsym $mod+v			exec $term -e ncmpcpp -s visualizer
-bindsym $mod+Shift+v		exec --no-startup-id projectM-pulseaudio
-
-bindsym $mod+b			bar mode toggle
-bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id bottomleft
-
-bindsym $mod+n			exec $term -e newspod
-bindsym $mod+Shift+n    $next
-
-#bindsym $mod+m 			exec --no-startup-id st -e ncmpcpp
-#bindsym $mod+Shift+m		exec --no-startup-id lmc mute
-bindsym $mod+Shift+m    $playpause
-
-
 
 # #---Workspace Bindings---# #
-bindsym $mod+Home		workspace $ws1
+bindsym $mod+Home		    workspace $ws1
 bindsym $mod+Shift+Home		move container to workspace $ws1
-bindsym $mod+End		workspace $ws10
+bindsym $mod+End		    workspace $ws10
 bindsym $mod+Shift+End		move container to workspace $ws10
-bindsym $mod+Prior		workspace prev
+bindsym $mod+Prior		    workspace prev
 bindsym $mod+Shift+Prior	move container to workspace prev
-bindsym $mod+Next		workspace next
+bindsym $mod+Next		    workspace next
 bindsym $mod+Shift+Next		move container to workspace next
-bindsym $mod+Tab		workspace back_and_forth
+bindsym $mod+Tab		    workspace back_and_forth
 bindsym $mod+XF86Back		workspace prev
 #bindsym $mod+Shift+XF86Back
 bindsym $mod+XF86Forward	workspace next
 #bindsym $mod+Shift+XF86Forward
 bindsym $mod+semicolon		workspace next
 bindsym $mod+apostrophe		split horizontal ;; exec $term
-bindsym $mod+slash		split vertical ;; exec $term
+bindsym $mod+slash		    split vertical ;; exec $term
 #bindsym $mod+Shift+slash	kill
 bindsym $mod+backslash		workspace back_and_forth
 
@@ -303,6 +303,7 @@ bindsym $mod+Control+Shift+9	move container to workspace $ws19
 bindsym $mod+Control+Shift+0	move container to workspace $ws20
 
 
+
 #for_window [class="Pinentry"] sticky enable
 #for_window [class="sent"] border pixel 0px
 #for_window [class="Blender"] move to workspace $ws6
@@ -312,34 +313,19 @@ bindsym $mod+Control+Shift+0	move container to workspace $ws20
 #for_window [window_role="GtkFileChooserDialog"] resize shrink height 10 px
 #for_window [title="Default - Wine desktop"] floating enable
 
-# First I have a tmux window used for background scripts.
-# I'll later bind this to mod+u.
-for_window [instance="dropdown"] floating enable
-for_window [instance="dropdown"] resize set 625 400
-for_window [instance="dropdown"] move scratchpad
-for_window [instance="dropdown"] border pixel 3
-# Runs the tmuxinit script, which searches for an earlier tmux instance,
-# otherwise starts a new one (to prevent multiple dropdown sessions).
-exec --no-startup-id $term -n dropdown -e tmuxinit
+# #---Dropdown Windows---# #
+# General dropdown window traits. The order can matter.
+for_window [instance="dropdown_*"] floating enable
+for_window [instance="dropdown_*"] move scratchpad
+for_window [instance="dropdown_*"] sticky enable
+for_window [instance="dropdown_*"] scratchpad show
+for_window [instance="dropdown_tmuxdd"] resize set 625 450
+for_window [instance="dropdown_dropdowncalc"] resize set 800 300
+for_window [instance="dropdown_tmuxdd"] border pixel 3
+for_window [instance="dropdown_dropdowncalc"] border pixel 2
+for_window [instance="dropdown_*"] move position center
 
-# Then I have a window running R I use for basic arithmetic
-# I'll later bind this to mod+a.
-#for_window [instance="__math"] floating enable
-#for_window [instance="__math"] resize set 800 300
-#for_window [instance="__math"] move scratchpad
-#for_window [instance="__math"] border pixel 2
-#exec --no-startup-id $term -n __math -f mono:pixelsize=24 -e dropdowncalc
-for_window [title="__math"] floating enable
-for_window [title="__math"] resize set 800 300
-for_window [title="__math"] move scratchpad
-for_window [title="__math"] border pixel 2
-exec --no-startup-id $term -title __math -f mono:pixelsize=24 -e dropdowncalc
 
-# Bindings to make the webcam float and stick.
-#for_window [title="mpvfloat"] floating enable
-#for_window [title="mpvfloat"] sticky enable
-#for_window [title="mpvfloat"] border pixel 0
-#no_focus [title="mpvfloat"]
 
 # #---Function Buttons---# #
 bindsym $mod+F1		exec --no-startup-id zathura ~/.config/i3/i3_guide.pdf
@@ -358,10 +344,10 @@ bindsym $mod+F12	exec $term -e sudo -A wifi-menu
 
 
 # #---Arrow Keys---# #
-bindsym $mod+Left		focus left
-bindsym $mod+Down		focus down
-bindsym $mod+Up			focus up
-bindsym $mod+Right 		focus right
+bindsym $mod+Left		    focus left
+bindsym $mod+Down		    focus down
+bindsym $mod+Up			    focus up
+bindsym $mod+Right 		    focus right
 bindsym $mod+Shift+Left		move left
 bindsym $mod+Shift+Down		move down
 bindsym $mod+Shift+Up		move up
