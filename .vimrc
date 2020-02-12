@@ -3,23 +3,25 @@
 filetype on
 filetype plugin on
 filetype indent on
+syntax on
 
 " don't make vim compatible with vi
 set nocompatible
-syntax on
-set number
-set relativenumber
+set number relativenumber
+set wildmode=longest,list,full
+set nosplitbelow splitright
 
-" .h files are c files!
 augroup project
     autocmd!
     autocmd BufRead,BufNewFile *.h,*.c set filetype=c
     autocmd BufRead,BufNewFile *.pl set filetype=prolog
     autocmd BufRead,BufNewFile *.sql set filetype=plsql
-    au! BufRead,BufNewFile *.m,*.oct set filetype=octave
+    autocmd BufRead,BufNewFile *.m,*.oct set filetype=octave
+    autocmd BufRead,BufNewFile *.asm set filetype=nasm
+    autocmd BufRead,BufNewFile *.S set filetype=asm
 augroup END
 
-" For everything else, use a tab width of 4 space chars.
+"Default use a tab width of 4 space chars.
 set tabstop=4       " The width of a TAB is set to 4.
                     " Still it is a \t. It is just that
                     " Vim will interpret it to be having
@@ -28,8 +30,6 @@ set shiftwidth=4    " Indents will have a width of 4.
 set softtabstop=4   " Sets the number of columns for a TAB.
 set expandtab       " Expand TABs to spaces.
 set shiftround      "Round indent to nearest shiftwidth multiple
- " Use actual tab chars in Makefiles.
- "set autoread
 set encoding=utf-8
 set fenc=utf-8
 "set mouse=a
@@ -66,23 +66,25 @@ set viminfo='100,f1
 " non-typed comments
 set lazyredraw
 
-" map pl spellchecking to <F6>
-map <F6> :set spell! spelllang=pl<CR>
-map <F7> :set spell! spelllang=en<CR>
-
-au BufRead,BufNewFile *.asm set filetype=nasm
-
 " Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
 
+" map pl spellchecking to <F6>
+map <F6> :set spell! spelllang=pl<CR>
+map <F7> :set spell! spelllang=en<CR>
+
 " Ctags shortcuts: new tab and vsplit
 map <C-W><C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <C-W><C-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
+vnoremap <C-c> "*y :let @+=@*<CR>
+map <C-p> "+P
+
 "color 81 column:
 "set colorcolumn=81
+
 "highlight ColorColumn ctermbg=Black ctermfg=DarkRed
 " Highlight trailing spaces
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
@@ -93,7 +95,21 @@ map <C-W><C-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 "autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 "autocmd BufWinLeave * call clearmatches()
 
+"remove all trailing spaces
 :nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
+"remove all tex build files when leaving vim
+autocmd VimLeave *.tex :VimtexClean
+
+function! RemoveTrailingSpaces()
+   let save_pos = getpos(".")
+    %s/\s\+$//e
+   call setpos(".", save_pos)
+endfunction
+
+"remove all trailing spaces on save
+autocmd BufWritePre * call RemoveTrailingSpaces()
+
 
 " ---------------------- PLUGIN CONFIGURATION ----------------------
 " set the runtime path to include Vundle and initialize
@@ -162,24 +178,16 @@ let g:ale_fixers = {
 " after 20 keystrokes quickfix window will disappear
 "let g:vimtex_quickfix_autoclose_after_keystrokes = 20
 
-
-
-"CtrlP and SQLWorkbech config
-"let g:ctrlp_map = '<c-p>'
-"let g:ctrlp_cmd = 'CtrlP'
-"let g:sw_exe = '/opt/SQLWorkbench/sqlwbconsole.sh'
-"let g:ctrlp_extensions = ['sw_profiles']
-"let g:sw_config_dir = '/home/tkanas/.sqlworkbench'
-
 "Hdevtools bindings
- au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
- au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsInfo<CR>
- au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsClear<CR>
+au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsInfo<CR>
+au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsClear<CR>
 
+"lightline configs
+set laststatus=2 noshowmode
 
 "Enables project-specific vim configs (and forbids them weird things)
-set exrc
-set secure
+set exrc secure
 
 "------------------OLD CONFIGS-------------------------
 " start NERDTree on start-up and focus active window
@@ -200,4 +208,12 @@ set secure
 " Syntastic asm configuration
 "let g:syntastic_nasm_checkers = ['nasm']
 "let g:syntastic_nasm_nasm_args = ['-f elf64']
+
+"CtrlP and SQLWorkbech config
+"let g:ctrlp_map = '<c-p>'
+"let g:ctrlp_cmd = 'CtrlP'
+"let g:sw_exe = '/opt/SQLWorkbench/sqlwbconsole.sh'
+"let g:ctrlp_extensions = ['sw_profiles']
+"let g:sw_config_dir = '/home/tkanas/.sqlworkbench'
+
 
