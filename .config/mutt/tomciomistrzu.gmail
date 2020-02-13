@@ -1,5 +1,5 @@
 set imap_user = "tomciomistrzu@gmail.com"
-# set imap_pass = "PASSWORD"
+set imap_pass = $my_tomciomistrzu_pass
 set smtp_url = "smtp://tomciomistrzu@smtp.gmail.com:587/"
 set from = "tomciomistrzu@gmail.com"
 set realname = "Tomasz Kanas"

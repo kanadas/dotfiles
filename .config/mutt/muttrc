@@ -1,18 +1,28 @@
 
+source "gpg -dq $HOME/.config/mutt/passes.gpg |"
+
 # Folder hooks
 folder-hook 'kanas.tomasz.gmail' 'source ~/.config/mutt/kanas.tomasz.gmail'
 folder-hook 'tomciomistrzu.gmail' 'source ~/.config/mutt/tomciomistrzu.gmail'
 folder-hook 'tomciokanas1997.gmail' 'source ~/.config/mutt/tomciokanas1997.gmail'
 folder-hook 't.kanas.student.uw' 'source ~/.config/mutt/t.kanas.student.uw'
 
+# Connect all accounts to cache them (not working)
+#source ~/.config/mutt/tomciomistrzu.gmail
+#source ~/.config/mutt/t.kanas.student.uw
 # Default account
 source ~/.config/mutt/kanas.tomasz.gmail
 
 # Macros for switching accounts
 macro index <F12> '<sync-mailbox><enter-command>source ~/.config/mutt/kanas.tomasz.gmail<enter><change-folder>!<enter>'
-macro index <F11> '<sync-mailbox><enter-command>source ~/.config/mutt/tomciomistrzu.gmail<enter><change-folder>!<enter>'
-macro index <F10> '<sync-mailbox><enter-command>source ~/.config/mutt/tomciokanas1997.gmail<enter><change-folder>!<enter>'
-macro index <F9> '<sync-mailbox><enter-command>source ~/.config/mutt/t.kanas.student.uw<enter><change-folder>!<enter>'
+macro index <F11> '<sync-mailbox><enter-command>source ~/.config/mutt/t.kanas.student.uw<enter><change-folder>!<enter>'
+macro index <F10> '<sync-mailbox><enter-command>source ~/.config/mutt/tomciomistrzu.gmail<enter><change-folder>!<enter>'
+macro index <F9> '<sync-mailbox><enter-command>source ~/.config/mutt/tomciokanas1997.gmail<enter><change-folder>!<enter>'
+
+#Caching
+set header_cache_backend = "kyotocabinet"
+set header_cache = "$HOME/.cache/mutt"
+set message_cachedir = "$HOME/.cache/mutt"
 
 # Set default text editor
 set editor = "$EDITOR"
