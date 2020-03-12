@@ -1,7 +1,7 @@
 set imap_user = "t.kanas@student.uw.edu.pl"
 set imap_pass = $my_t_kanas_pass
 set smtp_url = "smtp://t.kanas@student.uw.edu.pl@smtp.gmail.com:587/"
-set from = "kanas.tomasz@gmail.com"
+set from = "t.kanas@student.uw.edu.pl"
 set realname = "Tomasz Kanas"
 set folder = "imaps://imap.gmail.com:993/"
 set spoolfile = "+INBOX"

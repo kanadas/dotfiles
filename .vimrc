@@ -82,6 +82,9 @@ map <C-W><C-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 vnoremap <C-c> "*y :let @+=@*<CR>
 map <C-p> "+P
 
+" move viminfo files
+set viminfo+=n~/.vim/viminfo
+
 "color 81 column:
 "set colorcolumn=81
 

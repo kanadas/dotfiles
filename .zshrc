@@ -62,6 +62,10 @@ bindkey '^e' edit-command-line
 setopt correct
 export SPROMPT="Correct %R to %r? [Yes, No, Abort, Edit] "
 
+#Key bindings
+bindkey "^R" history-search-backward
+bindkey "^S" history-search-forward
+
 #Aliases
 alias ls='ls --color=auto'
 alias config='/usr/bin/git --git-dir=$HOME/.config.git --work-tree=$HOME'

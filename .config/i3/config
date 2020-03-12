@@ -153,7 +153,7 @@ bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
 bindsym $mod+h			    focus left
 bindsym $mod+Shift+h		move left 30
 
-bindsym $mod+i 			    exe c $term -e htop
+bindsym $mod+i 			    exec $term -e htop
 bindsym $mod+Shift+i		exec --no-startup-id i3resize up
 
 bindsym $mod+j			    focus down
