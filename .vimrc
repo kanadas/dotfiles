@@ -11,6 +11,11 @@ set number relativenumber
 set wildmode=longest,list,full
 set nosplitbelow splitright
 
+" cursor shape
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
+
 augroup project
     autocmd!
     autocmd BufRead,BufNewFile *.h,*.c set filetype=c

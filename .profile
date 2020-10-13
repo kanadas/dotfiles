@@ -8,3 +8,4 @@ export QEMU_AUDIO_DRV=pa
 export XDG_CONFIG_HOME="$HOME/.config"
 alias config='/usr/bin/git --git-dir=$HOME/.config.git --work-tree=$HOME'
 export PATH=$PATH:~/.cabal/bin
+export CLASSPATH='.;$HOME/.java/lib/ABLE.jar'
