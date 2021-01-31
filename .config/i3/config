@@ -519,17 +519,18 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # keyboard layout
 #exec_always setxkbmap -layout pl -option compose:menu -option lv3:alt_switch -option nbsp:level3n
 
-
+# Default disable touchpad
+exec_always --no-startup-id toggletouchpad
 
 # #---Startup Apps---# #
 for_window [class = "Spotify"] move to workspace $ws20
 for_window [class = "Skype"] move to workspace $ws19
-for_window [title = "neomutt"] move to workspace $ws10
+#for_window [title = "neomutt"] move to workspace $ws10
 #for_window [title = "Mailspring"] move to workspace $ws9
 
 exec spotify
 exec skypeforlinux
 exec $BROWSER
-exec $term -e neomutt
+#exec $term -e neomutt
 #exec mailspring
 
