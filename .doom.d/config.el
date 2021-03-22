@@ -44,6 +44,7 @@
   :after '(evil-window-split evil-window-vsplit)
   (+ivy/switch-buffer))
 (setq +ivy-buffer-preview t)
+;; enable c-default-style
 (setq-default c-basic-offset 'set-from-style)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -62,6 +63,8 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(load! "why3.el")
 
 ;;C, C++, Objective-C, Java, etc.
 (after! cc-mode
@@ -87,11 +90,16 @@
   (map! "M-/" #'rtags-find-references-at-point)
   )
 
+;;TODO check if it works
+;;(after! lsp-java
+;;  (setq lsp-java-content-provider-preferred "fernflower")
+;;  )
+
 (after! flycheck
   (add-hook 'flycheck-error-list-mode-hook 'visual-line-mode)
   )
-;;LATEX
 
+;;LATEX
 (after! latex
   (defun TeX-insert-single-quote (arg)
     (interactive "p")
@@ -108,7 +116,7 @@
     (setq-local company-backends
                 (append '((company-math-symbols-latex company-latex-commands)) company-backends))
     )
-  ;; (setq +latex-viewers '(pdf-tools)) ; commment this line to use zathura as latex viewer TODO not working
+  ;; (setq +latex-viewers '(pdf-tools)) ; commment this line to use zathura as latex viewer
   (setq TeX-parse-self t) ; Enable parse on load.
   (setq TeX-auto-save t) ; Enable parse on save.
   (add-hook 'LaTeX-mode-hook
@@ -139,13 +147,13 @@
   ;;smartparens
   (sp-local-pair 'LaTeX-mode "\\left(" "\\right)" :trigger "\\l(")
   (sp-local-pair 'LaTeX-mode "\\left[" "\\right]" :trigger "\\l[")
+  (sp-local-pair 'LaTeX-mode "[" ")")
+  (sp-local-pair 'LaTeX-mode "(" "]")
   )
 
 ;; COQ
-
 (after! coq
   (define-key proof-mode-map (kbd "<M-return>") 'proof-assert-next-command-interactive)
-  ;(local-unset-key (kbd "M-u"))
   (local-set-key (kbd "M-u") 'proof-undo-last-successful-command)
   (setq coq-accept-proof-using-suggestion 'always)
   (set-face-background proof-locked-face "190033")
@@ -153,4 +161,5 @@
 
 (after! company-coq
   (define-key company-coq-map (kbd "<M-return>") nil)
+  (define-key outline-mode-map (kbd "<normal-state> <M-return>") nil)
   )

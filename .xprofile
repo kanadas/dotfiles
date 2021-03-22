@@ -1,0 +1,3 @@
+#!/bin/sh
+xkbcomp ~/.config/xkb/mykbd $DISPLAY
+xcape
