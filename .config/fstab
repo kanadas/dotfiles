@@ -1,0 +1,16 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# DO NOT BLINDLY COPY THIS FILE TO CONFIG!!!!!
+# USE ONLY AS EXAMPLE!!!
+
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/sda1
+UUID=21a87238-132d-4c29-893e-37446e2a4594	/         	ext4      	rw,relatime	0 1
+
+# /dev/sdb2
+UUID=7bca1b24-01f9-44d6-8cca-ff81c3267193	/data     	ext4      	rw,relatime	0 2
+
+# /dev/sdb3
+UUID=dc7afad4-07b6-4368-a4f8-b9a35bbbbe9c	none      	swap      	defaults  	0 0
+
