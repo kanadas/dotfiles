@@ -56,7 +56,7 @@ set $spotify_play_next exec --no-startup-id dbus-send --print-reply --dest=org.m
 
 # #---Starting External Scripts---# #
 # Setting the background and colorscheme:
-exec_always --no-startup-id wal -i ~/.config/wall.png
+#exec_always --no-startup-id wal -i ~/.config/wall.png
 # Starts dunst for notifications:
 exec --no-startup-id dunst
 # Torrent daemon:

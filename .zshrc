@@ -67,7 +67,7 @@ bindkey "^S" history-search-forward
 
 #Aliases
 alias ls='ls --color=auto'
-alias config='/usr/bin/git --git-dir=$HOME/.config.git --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
 #Syntax highlighting plugin
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

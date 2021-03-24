@@ -54,13 +54,15 @@ module-margin-right = 2
 
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-#font-1 = FontAwesome5Free:style=Solid:size=10;4
 font-2 = siji:pixelsize=10;1
+font-3 = Font Awesome 5 Free: style=Solid: pixelsize=11
+font-4 = Font Awesome 5 Brands: pixelsize=11
+font-5 = Material Icons: style=Regular: pixelsize=13; 2
 
 modules-left = i3
 ;modules-center = mpd
 modules-center =
-modules-right = filesystem pulseaudio memory cpu wlan eth battery date powermenu
+modules-right = filesystem pulseaudio-control memory cpu wlan eth battery date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -229,16 +231,34 @@ format-prefix-foreground = ${colors.foreground-alt}
 
 label = %date% %time%
 
-[module/pulseaudio]
-type = internal/pulseaudio
+[module/pulseaudio-control]
+type = custom/script
+tail = true
+#format-underline = #00ffff
+label-padding = 2
+label-foreground = ${colors.foreground}
 
-#format-volume = <label-volume> <bar-volume>
-format-volume = <label-volume>
-label-volume = VOL %percentage%%
-label-volume-foreground = ${root.foreground}
+# Icons mixed from Font Awesome 5 and Material Icons
+# You can copy-paste your options for each possible action, which is more
+# trouble-free but repetitive, or apply only the relevant ones (for example
+# --sink-blacklist is only needed for next-sink).
+exec = pulseaudio-control --icons-volume " , " --icon-muted " " --sink-nicknames-from "device.description" --sink-nickname "alsa_output.pci-0000_00_1b.0.analog-stereo:  Speakers" --sink-nickname "alsa_output.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00.analog-stereo:  Headphones" listen
+click-right = exec pavucontrol &
+click-left = pulseaudio-control togmute
+click-middle = pulseaudio-control --sink-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2" next-sink
+scroll-up = pulseaudio-control --volume-max 130 up
+scroll-down = pulseaudio-control --volume-max 130 down
 
-label-muted = 🔇 muted
-label-muted-foreground = #666
+;[module/pulseaudio]
+;type = internal/pulseaudio
+;
+;#format-volume = <label-volume> <bar-volume>
+;format-volume = <label-volume>
+;label-volume = VOL %percentage%%
+;label-volume-foreground = ${root.foreground}
+;
+;label-muted = 🔇 muted
+;label-muted-foreground = #666
 
 ;bar-volume-width = 10
 ;bar-volume-foreground-0 = #55aa55

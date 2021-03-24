@@ -7,7 +7,7 @@ export RANGER_LOAD_DEFAULT_RC="FALSE"
 export QEMU_AUDIO_DRV=pa
 export XDG_CONFIG_HOME="$HOME/.config"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
-alias config='/usr/bin/git --git-dir=$HOME/.config.git --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 export PATH=$PATH:~/.cabal/bin
 export PATH=$PATH:~/.emacs.d/bin
 export PATH=$PATH:~/Programs/arm/bin

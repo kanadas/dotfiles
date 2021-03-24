@@ -121,6 +121,8 @@ autocmd BufWritePre * call RemoveTrailingSpaces()
 
 " ---------------------- PLUGIN CONFIGURATION ----------------------
 " set the runtime path to include Vundle and initialize
+function! _blockcomment ()
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -193,6 +195,8 @@ au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsClear<CR>
 
 "lightline configs
 set laststatus=2 noshowmode
+
+endfunction "_blockcomment
 
 "Enables project-specific vim configs (and forbids them weird things)
 set exrc secure

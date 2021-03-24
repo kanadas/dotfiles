@@ -38,7 +38,7 @@ URxvt.scrollBar:	false
 URxvt.cursorColor:	white
 
 !! Extensions
-URxvt.perl-ext-common:	default,matcher,resize-font,url-select,keyboard-select,selection-to-clipboard
+URxvt.perl-ext-common:	default,matcher,url-select,keyboard-select,selection-to-clipboard
 URxvt.colorUL:		#4682B4
 !! url-select
 URxvt.keysym.ISOLevel3-u: perl:url-select:select_next
