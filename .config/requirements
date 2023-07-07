@@ -1,0 +1,25 @@
+pulseaudio
+pulseaudio-alsa
+pavucontrol
+pulseaudio-control (aur)
+network-manager-applet (aur)
+dunst
+compton
+lib32-fontconfig
+ttf-liberation
+ttf-mtl-material-design (aur)
+ttf-material-design-icons (aur)
+ttf-unifont (aur)
+ttf-font-awesome (aur)
+polybar
+        fonts advised by polybar and doom emacs
+ntp
+bluez
+bluez-utils
+blueman
+clang
+texlive-most
+latex-mk (aur)
+zathura
+zathura-pdf-mupdf
+zathura-ps (for postscript)

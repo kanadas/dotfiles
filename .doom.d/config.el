@@ -46,6 +46,11 @@
 (setq +ivy-buffer-preview t)
 ;; enable c-default-style
 (setq-default c-basic-offset 'set-from-style)
+(ispell-change-dictionary "polish" t)
+(setq
+ projectile-project-search-path '("~/studies/", "~/PhD")
+ )
+
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -64,7 +69,29 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(load! "why3.el")
+;;(load! "why3.el")
+;;(load! "promela-mode.el")
+
+;; LSP
+(after! lsp-mode
+  (map! "M-RET" #'lsp-execute-code-action)
+  (map! :m "g d" #'lsp-find-definition)
+  (map! :m "g i" #'lsp-find-implementation)
+  (map! :m "g b" #'xref-go-back)
+  (map! :m "g e" nil)
+  (map! :m "g e" #'next-error)
+  (map! :leader "c r" #'lsp-rename)
+  (lsp-treemacs-sync-mode 1)
+  )
+
+;; Python
+(after! python
+  (setq lsp-pyright-use-library-code-for-types nil)
+  )
+
+;; R markdown
+(add-to-list 'auto-mode-alist '("\\.Rmd\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.rmd\\'" . markdown-mode))
 
 ;;C, C++, Objective-C, Java, etc.
 (after! cc-mode
@@ -90,10 +117,9 @@
   (map! "M-/" #'rtags-find-references-at-point)
   )
 
-;;TODO check if it works
-;;(after! lsp-java
-;;  (setq lsp-java-content-provider-preferred "fernflower")
-;;  )
+(after! lsp-java
+  (setq lsp-java-content-provider-preferred "fernflower")
+  )
 
 (after! flycheck
   (add-hook 'flycheck-error-list-mode-hook 'visual-line-mode)
@@ -139,7 +165,7 @@
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
   (add-hook 'TeX-mode-hook '(lambda ()
                               (add-hook 'after-save-hook '(lambda ()
-                                                            (TeX-command "LaTeX" 'TeX-master-file)
+                                                            (TeX-command "LatexMk" 'TeX-master-file)
                                                             )
                                         )
                               )
@@ -150,6 +176,7 @@
   (sp-local-pair 'LaTeX-mode "[" ")")
   (sp-local-pair 'LaTeX-mode "(" "]")
   )
+
 
 ;; COQ
 (after! coq
@@ -163,3 +190,10 @@
   (define-key company-coq-map (kbd "<M-return>") nil)
   (define-key outline-mode-map (kbd "<normal-state> <M-return>") nil)
   )
+
+;; Grammarly
+(use-package! lsp-grammarly
+  :ensure t
+  :hook (text-mode . (lambda ()
+                       (require 'lsp-grammarly)
+                       (lsp))))  ; or lsp-deferred

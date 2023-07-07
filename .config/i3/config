@@ -29,8 +29,8 @@
 
 # #---Basic Definitions---# #
 for_window [class="^.*"] border pixel 2
-gaps inner 0 #15
-gaps outer 0 #15
+gaps inner 0px
+gaps outer 0px
 set $mod Mod4
 set $term --no-startup-id $TERMINAL
 set $shutdown sudo -A shutdown -h now
@@ -51,7 +51,6 @@ font pango:monospace 8
 set $spotify_playpause exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 set $spotify_play_previous exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 set $spotify_play_next exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-
 
 
 # #---Starting External Scripts---# #
@@ -214,6 +213,9 @@ set $freeze Distraction-free mode (mod+shift+esc to exit)
 mode "$freeze" { bindsym $mod+Shift+Escape mode "default"
 }
 
+# #---Monitor variables----# #
+set $mainm HDMI1
+set $laptop eDP1
 
 # #---Workspace Bindings---# #
 bindsym $mod+Home		    workspace $ws1
@@ -235,6 +237,29 @@ bindsym $mod+slash		    split vertical ;; exec $term
 #bindsym $mod+Shift+slash	kill
 bindsym $mod+backslash		workspace back_and_forth
 
+# set workspaces monitors
+workspace 1 output $mainm
+workspace 2 output $mainm
+workspace 3 output $mainm
+workspace 4 output $mainm
+workspace 5 output $mainm
+workspace 6 output $mainm
+workspace 7 output $mainm
+workspace 8 output $mainm
+workspace 9 output $mainm
+workspace 10 output $mainm
+workspace 11 output $laptop
+workspace 12 output $laptop
+workspace 13 output $laptop
+workspace 14 output $laptop
+workspace 15 output $laptop
+workspace 16 output $laptop
+workspace 17 output $laptop
+workspace 18 output $laptop
+workspace 19 output $laptop
+workspace 20 output $laptop
+
+# Define workspace vars
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -524,16 +549,20 @@ exec_always --no-startup-id toggletouchpad
 
 # #---Startup Apps---# #
 for_window [class = "Spotify"] move to workspace $ws20
-for_window [class = "Skype"] move to workspace $ws19
 for_window [class = "Slack"] move to workspace $ws17
+for_window [class = "Zotero"] move to workspace $ws16
 #for_window [title = "neomutt"] move to workspace $ws10
 #for_window [title = "Mailspring"] move to workspace $ws9
+#for_window [class = "Skype"] move to workspace $ws19
 
 exec spotify
-exec skypeforlinux
 exec $BROWSER
 exec blueman-applet
 exec slack
+exec zotero
 #exec $term -e neomutt
+#exec skypeforlinux
 #exec mailspring
 
+#Mound Google Drive
+exec google-drive-ocamlfuse ~/drive
