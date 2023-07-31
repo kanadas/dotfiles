@@ -10,7 +10,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 export PATH=$PATH:~/.cabal/bin
-export PATH=$PATH:~/.emacs.d/bin
+export PATH=$PATH:~/.config/emacs/bin
 export PATH=$PATH:~/Programs/arm/bin
 #export CLASSPATH='.;$HOME/.java/lib/ABLE.jar'
 

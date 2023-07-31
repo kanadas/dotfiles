@@ -555,7 +555,7 @@ for_window [class = "Zotero"] move to workspace $ws16
 #for_window [title = "Mailspring"] move to workspace $ws9
 #for_window [class = "Skype"] move to workspace $ws19
 
-exec spotify
+exec spotify-launcher
 exec $BROWSER
 exec blueman-applet
 exec slack
